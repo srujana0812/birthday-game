@@ -1,3 +1,12 @@
+let hiddenInput = document.getElementById("hiddenInput");
+
+// focus when page loads
+window.onload = () => {
+  hiddenInput.focus();
+};
+document.addEventListener("click", () => {
+  hiddenInput.focus();
+});
 let grid = document.getElementById("grid");
 
 // CREATE GRID
