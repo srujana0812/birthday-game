@@ -90,7 +90,7 @@ function checkGuess() {
   // WIN
   if (guess === answer) {
     setTimeout(() => {
-      alert("Yayyy !!!💖");
+      alert("Yayyy !! I love you !! 💖");
     }, 1600);
   }
 
