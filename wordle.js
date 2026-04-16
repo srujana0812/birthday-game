@@ -1,5 +1,50 @@
 let hiddenInput = document.getElementById("hiddenInput");
 
+hiddenInput.addEventListener("input", function () {
+  let value = hiddenInput.value.toUpperCase();
+
+  let rows = document.getElementsByClassName("row");
+  let boxes = rows[currentRow].children;
+
+  let lastChar = value[value.length - 1];
+
+  if (/^[A-Z]$/.test(lastChar)) {
+    if (currentCol < 5) {
+      boxes[currentCol].innerText = lastChar;
+      boxes[currentCol].classList.add("filled");
+      currentCol++;
+    }
+  }
+
+  hiddenInput.value = "";
+});
+
+hiddenInput.addEventListener("keydown", function (event) {
+  let rows = document.getElementsByClassName("row");
+  let boxes = rows[currentRow].children;
+
+  if (event.key === "Backspace") {
+    if (currentCol > 0) {
+      currentCol--;
+      boxes[currentCol].innerText = "";
+    }
+  }
+
+  if (event.key === "Enter") {
+    let guess = "";
+
+    for (let i = 0; i < 5; i++) {
+      guess += boxes[i].innerText;
+    }
+
+    if (guess.length === 5) {
+      checkGuess();
+      currentRow++;
+      currentCol = 0;
+    }
+  }
+});
+
 // focus when page loads
 window.onload = () => {
   hiddenInput.focus();
