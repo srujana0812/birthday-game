@@ -8,11 +8,6 @@ for (let i = 0; i < 6; i++) {
   for (let j = 0; j < 5; j++) {
     let box = document.createElement("div");
     box.classList.add("box");
-
-    let inner = document.createElement("div");
-    inner.classList.add("inner");
-
-    box.appendChild(inner);
     row.appendChild(box);
   }
 
@@ -23,7 +18,7 @@ for (let i = 0; i < 6; i++) {
 let currentRow = 0;
 let answer = "ILUVU";
 
-// INPUT SYSTEM (MOBILE + DESKTOP)
+// INPUT SYSTEM
 const hiddenInput = document.getElementById("hiddenInput");
 
 // focus
@@ -40,7 +35,7 @@ hiddenInput.addEventListener("input", function () {
   let boxes = rows[currentRow].children;
 
   for (let i = 0; i < 5; i++) {
-    boxes[i].querySelector(".inner").innerText = value[i] || "";
+    boxes[i].innerText = value[i] || "";
   }
 });
 
@@ -61,7 +56,7 @@ hiddenInput.addEventListener("keydown", function (event) {
     setTimeout(() => {
       let val = hiddenInput.value;
       for (let i = 0; i < 5; i++) {
-        boxes[i].querySelector(".inner").innerText = val[i] || "";
+        boxes[i].innerText = val[i] || "";
       }
     }, 0);
   }
@@ -75,34 +70,27 @@ function checkGuess() {
   let guess = "";
 
   for (let i = 0; i < 5; i++) {
-    guess += boxes[i].querySelector(".inner").innerText;
+    guess += boxes[i].innerText;
   }
 
   for (let i = 0; i < 5; i++) {
-    setTimeout(() => {
-      boxes[i].classList.add("flip");
-
-      setTimeout(() => {
-        if (guess[i] === answer[i]) {
-          boxes[i].classList.add("green");
-        } else if (answer.includes(guess[i])) {
-          boxes[i].classList.add("pink");
-        } else {
-          boxes[i].classList.add("darkpink");
-        }
-      }, 300);
-
-    }, i * 500);
+    if (guess[i] === answer[i]) {
+      boxes[i].classList.add("green");
+    } else if (answer.includes(guess[i])) {
+      boxes[i].classList.add("pink");
+    } else {
+      boxes[i].classList.add("darkpink");
+    }
   }
 
   // WIN
   if (guess === answer) {
-    setTimeout(() => alert("Yayyy !!!💖"), 1600);
+    setTimeout(() => alert("Yayyy !!!💖"), 200);
   }
 
   // LOSE
   if (currentRow === 5 && guess !== answer) {
-    setTimeout(() => alert("The word was " + answer + " 💔"), 1600);
+    setTimeout(() => alert("The word was " + answer + " 💔"), 200);
   }
 }
 
@@ -113,8 +101,8 @@ function resetGame() {
   for (let i = 0; i < 6; i++) {
     let boxes = rows[i].children;
     for (let j = 0; j < 5; j++) {
-      boxes[j].querySelector(".inner").innerText = "";
-      boxes[j].classList.remove("green", "pink", "darkpink", "flip");
+      boxes[j].innerText = "";
+      boxes[j].classList.remove("green", "pink", "darkpink");
     }
   }
 
