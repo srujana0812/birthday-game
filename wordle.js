@@ -8,6 +8,11 @@ for (let i = 0; i < 6; i++) {
   for (let j = 0; j < 5; j++) {
     let box = document.createElement("div");
     box.classList.add("box");
+
+    let inner = document.createElement("div");
+    inner.classList.add("inner");
+
+    box.appendChild(inner);
     row.appendChild(box);
   }
 
@@ -16,12 +21,16 @@ for (let i = 0; i < 6; i++) {
 
 // GAME STATE
 let currentRow = 0;
-let currentCol = 0;
 let answer = "ILUVU";
 
-// KEYBOARD INPUT
-
+// INPUT SYSTEM (MOBILE + DESKTOP)
 const hiddenInput = document.getElementById("hiddenInput");
+
+// focus
+window.onload = () => hiddenInput.focus();
+document.body.addEventListener("click", () => hiddenInput.focus());
+
+// TYPE LETTERS
 hiddenInput.addEventListener("input", function () {
   let value = hiddenInput.value.toUpperCase();
 
@@ -31,11 +40,11 @@ hiddenInput.addEventListener("input", function () {
   let boxes = rows[currentRow].children;
 
   for (let i = 0; i < 5; i++) {
-    boxes[i].innerText = value[i] || "";
+    boxes[i].querySelector(".inner").innerText = value[i] || "";
   }
-
-  currentCol = value.length;
 });
+
+// ENTER + BACKSPACE
 hiddenInput.addEventListener("keydown", function (event) {
   let rows = document.getElementsByClassName("row");
   let boxes = rows[currentRow].children;
@@ -52,12 +61,11 @@ hiddenInput.addEventListener("keydown", function (event) {
     setTimeout(() => {
       let val = hiddenInput.value;
       for (let i = 0; i < 5; i++) {
-        boxes[i].innerText = val[i] || "";
+        boxes[i].querySelector(".inner").innerText = val[i] || "";
       }
     }, 0);
   }
 });
-
 
 // CHECK GUESS
 function checkGuess() {
@@ -67,39 +75,34 @@ function checkGuess() {
   let guess = "";
 
   for (let i = 0; i < 5; i++) {
-    guess += boxes[i].innerText;
+    guess += boxes[i].querySelector(".inner").innerText;
   }
 
-  // COLOR WITH DELAY
   for (let i = 0; i < 5; i++) {
-  setTimeout(() => {
-    boxes[i].classList.add("flip");
-
     setTimeout(() => {
-      if (guess[i] === answer[i]) {
-        boxes[i].classList.add("green");
-      } else if (answer.includes(guess[i])) {
-        boxes[i].classList.add("pink");
-      } else {
-        boxes[i].classList.add("darkpink");
-      }
-    }, 300); // color after half flip
+      boxes[i].classList.add("flip");
 
-  }, i * 500); // delay between tiles
-}
+      setTimeout(() => {
+        if (guess[i] === answer[i]) {
+          boxes[i].classList.add("green");
+        } else if (answer.includes(guess[i])) {
+          boxes[i].classList.add("pink");
+        } else {
+          boxes[i].classList.add("darkpink");
+        }
+      }, 300);
+
+    }, i * 500);
+  }
 
   // WIN
   if (guess === answer) {
-    setTimeout(() => {
-      alert("Yayyy !!!💖");
-    }, 1600);
+    setTimeout(() => alert("Yayyy !!!💖"), 1600);
   }
 
   // LOSE
   if (currentRow === 5 && guess !== answer) {
-    setTimeout(() => {
-      alert("The word was " + answer + " 💔");
-    }, 1600);
+    setTimeout(() => alert("The word was " + answer + " 💔"), 1600);
   }
 }
 
@@ -110,46 +113,16 @@ function resetGame() {
   for (let i = 0; i < 6; i++) {
     let boxes = rows[i].children;
     for (let j = 0; j < 5; j++) {
-      boxes[j].innerText = "";
-      boxes[j].classList.remove("green", "pink", "darkpink", "filled", "flip");
+      boxes[j].querySelector(".inner").innerText = "";
+      boxes[j].classList.remove("green", "pink", "darkpink", "flip");
     }
   }
 
   currentRow = 0;
-  currentCol = 0;
+  hiddenInput.value = "";
 }
+
+// BACK
 function goBack() {
   window.location.href = "index.html";
-}
-
-// focus when page loads
-window.onload = () => {
-  hiddenInput.focus();
-};
-
-// keep focusing if user taps anywhere
-document.body.addEventListener("click", () => {
-  hiddenInput.focus();
-});
-document.getElementById("mobileInput").focus();
-function submitGuess() {
-  let input = document.getElementById("mobileInput");
-  let guess = input.value.toUpperCase();
-
-  if (guess.length !== 5) return;
-
-  let rows = document.getElementsByClassName("row");
-  let boxes = rows[currentRow].children;
-
-  // fill row
-  for (let i = 0; i < 5; i++) {
-    boxes[i].innerText = guess[i];
-    boxes[i].classList.add("filled");
-  }
-
-  checkGuess();
-  currentRow++;
-  currentCol = 0;
-
-  input.value = ""; // clear input
 }
