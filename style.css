@@ -7,7 +7,6 @@ body {
   font-family: 'Poppins', Arial, sans-serif;
   text-align: center;
   min-height: 100vh;
-
   background: url("bg.jpeg") no-repeat center center;
   background-size: cover;
 }
@@ -30,49 +29,31 @@ body {
   margin-bottom: 10px;
 }
 
-/* BOX (container only) */
+/* BOX */
 .box {
   width: 65px;
   height: 65px;
-  perspective: 1000px;
-}
-
-/* INNER (tile) */
-.inner {
-  width: 100%;
-  height: 100%;
   background: #eee;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   font-size: 26px;
   font-weight: 600;
   border-radius: 12px;
-
-  transition: transform 0.6s;
-  transform-style: preserve-3d;
-  backface-visibility: hidden;
-}
-
-/* FLIP ANIMATION */
-.box.flip .inner {
-  transform: rotateX(180deg);
 }
 
 /* COLORS */
-.green .inner {
+.green {
   background: #5063ee;
   color: white;
 }
 
-.pink .inner {
+.pink {
   background: #ce7cf4;
   color: white;
 }
 
-.darkpink .inner {
+.darkpink {
   background: #f36faa;
   color: white;
 }
@@ -88,7 +69,6 @@ button {
   cursor: pointer;
   font-family: 'Poppins', sans-serif;
   font-weight: 600;
-  transition: 0.2s;
 }
 
 button:hover {
@@ -102,7 +82,7 @@ button:hover {
   left: 20px;
 }
 
-/* HIDDEN INPUT (for mobile typing) */
+/* HIDDEN INPUT */
 #hiddenInput {
   position: absolute;
   opacity: 0;
