@@ -45,17 +45,17 @@ body {
   transition: 0.2s;
 }
 
-.green {
+.green .inner {
   background: #5063ee;
   color: white;
 }
 
-.pink {
+.pink .inner {
   background: #ce7cf4;
   color: white;
 }
 
-.darkpink {
+.darkpink .inner {
   background: #f36faa;
   color: white;
 }
@@ -105,11 +105,30 @@ input {
 }
 /* FLIP ANIMATION */
 .box {
-  transform-style: preserve-3d;
-  transition: transform 0.6s;
+  width: 65px;
+  height: 65px;
+  perspective: 1000px;
 }
 
-.box.flip {
+/* inner layer */
+.inner {
+  width: 100%;
+  height: 100%;
+  background: #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  font-weight: 600;
+  border-radius: 12px;
+
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+/* flip only inner */
+.box.flip .inner {
   transform: rotateX(180deg);
 }
 #hiddenInput {
