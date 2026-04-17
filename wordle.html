@@ -6,15 +6,16 @@
 </head>
 
 <body>
+
+<!-- hidden input for mobile keyboard -->
 <input id="hiddenInput" type="text" style="opacity:0; position:absolute;">
+
 <button onclick="goBack()" class="back-btn">⬅ Back</button>
 
 <h1 class="title">Wordle 💕</h1>
 
-<div id="grid" class="grid"></div> <!-- 👈 ONLY FIX -->
-<input type="text" id="mobileInput" maxlength="5" placeholder="Type here">
-<br>
-<button onclick="submitGuess()">Submit</button>
+<div id="grid" class="grid"></div>
+
 <button onclick="resetGame()">Reset 💕</button>
 
 <script src="wordle.js"></script>
