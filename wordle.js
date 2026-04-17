@@ -18,20 +18,20 @@ for (let i = 0; i < 6; i++) {
 let currentRow = 0;
 let answer = "ILUVU";
 
-// INPUT SYSTEM
+// INPUT
 const hiddenInput = document.getElementById("hiddenInput");
 
 // focus
 window.onload = () => hiddenInput.focus();
 document.body.addEventListener("click", () => hiddenInput.focus());
 
-// TYPE LETTERS
+// TYPE
 hiddenInput.addEventListener("input", function () {
   let value = hiddenInput.value.toUpperCase();
 
-  let rows = document.getElementsByClassName("row");
   if (currentRow >= 6) return;
 
+  let rows = document.getElementsByClassName("row");
   let boxes = rows[currentRow].children;
 
   for (let i = 0; i < 5; i++) {
@@ -41,20 +41,29 @@ hiddenInput.addEventListener("input", function () {
 
 // ENTER + BACKSPACE
 hiddenInput.addEventListener("keydown", function (event) {
+
+  if (currentRow >= 6) return;
+
   let rows = document.getElementsByClassName("row");
   let boxes = rows[currentRow].children;
 
+  // ENTER
   if (event.key === "Enter") {
-    if (hiddenInput.value.length === 5) {
-      checkGuess();
-      currentRow++;
-      hiddenInput.value = "";
-    }
+    let guess = hiddenInput.value.toUpperCase();
+
+    if (guess.length !== 5) return;
+
+    checkGuess(guess); // ✅ pass guess directly
+    currentRow++;
+
+    hiddenInput.value = "";
   }
 
+  // BACKSPACE FIX
   if (event.key === "Backspace") {
     setTimeout(() => {
-      let val = hiddenInput.value;
+      let val = hiddenInput.value.toUpperCase();
+
       for (let i = 0; i < 5; i++) {
         boxes[i].innerText = val[i] || "";
       }
@@ -63,17 +72,14 @@ hiddenInput.addEventListener("keydown", function (event) {
 });
 
 // CHECK GUESS
-function checkGuess() {
+function checkGuess(guess) {
   let rows = document.getElementsByClassName("row");
   let boxes = rows[currentRow].children;
 
-  let guess = "";
-
   for (let i = 0; i < 5; i++) {
-    guess += boxes[i].innerText;
-  }
+    // FORCE correct letter display (important fix)
+    boxes[i].innerText = guess[i];
 
-  for (let i = 0; i < 5; i++) {
     if (guess[i] === answer[i]) {
       boxes[i].classList.add("green");
     } else if (answer.includes(guess[i])) {
@@ -100,6 +106,7 @@ function resetGame() {
 
   for (let i = 0; i < 6; i++) {
     let boxes = rows[i].children;
+
     for (let j = 0; j < 5; j++) {
       boxes[j].innerText = "";
       boxes[j].classList.remove("green", "pink", "darkpink");
