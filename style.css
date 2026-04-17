@@ -8,7 +8,6 @@ body {
   text-align: center;
   min-height: 100vh;
 
-  /* BACKGROUND IMAGE */
   background: url("bg.jpeg") no-repeat center center;
   background-size: cover;
 }
@@ -23,7 +22,7 @@ body {
   text-transform: uppercase;
 }
 
-/* ROW (for Wordle JS) */
+/* ROW */
 .row {
   display: flex;
   justify-content: center;
@@ -31,20 +30,38 @@ body {
   margin-bottom: 10px;
 }
 
-/* BOX (for Wordle JS) */
+/* BOX (container only) */
 .box {
   width: 65px;
   height: 65px;
+  perspective: 1000px;
+}
+
+/* INNER (tile) */
+.inner {
+  width: 100%;
+  height: 100%;
   background: #eee;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   font-size: 26px;
   font-weight: 600;
   border-radius: 12px;
-  transition: 0.2s;
+
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
 }
 
+/* FLIP ANIMATION */
+.box.flip .inner {
+  transform: rotateX(180deg);
+}
+
+/* COLORS */
 .green .inner {
   background: #5063ee;
   color: white;
@@ -85,52 +102,7 @@ button:hover {
   left: 20px;
 }
 
-/* INPUT */
-input {
-  padding: 10px;
-  border-radius: 8px;
-  border: none;
-  outline: none;
-  text-align: center;
-  font-size: 16px;
-  font-family: 'Poppins', sans-serif;
-  margin-top: 10px;
-}
-
-/* MESSAGE */
-#message {
-  margin-top: 15px;
-  font-size: 18px;
-  font-weight: 500;
-}
-/* FLIP ANIMATION */
-.box {
-  width: 65px;
-  height: 65px;
-  perspective: 1000px;
-}
-
-/* inner layer */
-.inner {
-  width: 100%;
-  height: 100%;
-  background: #eee;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 26px;
-  font-weight: 600;
-  border-radius: 12px;
-
-  transition: transform 0.6s;
-  transform-style: preserve-3d;
-  backface-visibility: hidden;
-}
-
-/* flip only inner */
-.box.flip .inner {
-  transform: rotateX(180deg);
-}
+/* HIDDEN INPUT (for mobile typing) */
 #hiddenInput {
   position: absolute;
   opacity: 0;
