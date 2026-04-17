@@ -20,6 +20,8 @@ let currentCol = 0;
 let answer = "ILUVU";
 
 // KEYBOARD INPUT
+
+const hiddenInput = document.getElementById("hiddenInput");
 hiddenInput.addEventListener("input", function () {
   let value = hiddenInput.value.toUpperCase();
 
@@ -119,7 +121,6 @@ function resetGame() {
 function goBack() {
   window.location.href = "index.html";
 }
-const hiddenInput = document.getElementById("hiddenInput");
 
 // focus when page loads
 window.onload = () => {
