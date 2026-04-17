@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>My Games</title>
+
+<style>
+  body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4, #a1c4fd);
+    background-size: 300% 300%;
+    animation: gradientMove 8s ease infinite;
+  }
+
+  @keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .container {
+    text-align: center;
+    background: rgba(255,255,255,0.2);
+    padding: 40px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+  }
+
+  h1 {
+    font-size: 42px;
+    margin-bottom: 30px;
+  }
+
+  .game-link {
+    display: block;
+    margin: 15px auto;
+    padding: 15px;
+    width: 220px;
+    background: black;
+    color: white;
+    text-decoration: none;
+    border-radius: 12px;
+    font-size: 18px;
+    transition: 0.3s;
+  }
+
+  .game-link:hover {
+    transform: scale(1.05);
+    background: #333;
+  }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1>🎮 Birthday Games</h1>
+
+  <a class="game-link" href="wordle.html">🟩 Play Wordle</a>
+  <a class="game-link" href="strands.html">🧩 Play Strands</a>
+</div>
+
+</body>
+</html>

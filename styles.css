@@ -1,0 +1,89 @@
+body {
+  margin: 0;
+  font-family: 'Poppins', Arial, sans-serif;
+  text-align: center;
+  background: url("bg.jpeg") no-repeat center center;
+  background-size: cover;
+  min-height: 100vh;
+}
+
+/* GRID */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(6, 60px);
+  gap: 8px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/* CELLS */
+.cell {
+  width: 60px;
+  height: 60px;
+  background: #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: bold;
+  border-radius: 10px;
+  user-select: none;
+  transition: 0.2s;
+}
+
+.cell.selected {
+  background: #ffc0cb;
+}
+
+.cell.correct {
+  background: #ffb6c1;
+}
+
+/* BUTTON */
+button {
+  padding: 8px 15px;
+  margin: 10px;
+  border: none;
+  background: black;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.back-btn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  padding: 10px 15px;
+  border: none;
+  background: black;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.back-btn:hover {
+  background: #333;
+}
+
+/* TITLE */
+.title {
+  font-size: 48px;
+  letter-spacing: 4px;
+  margin-top: 20px;
+  color: #ff4d88;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+/* HINT BOX */
+.hint-box {
+  margin: 15px auto;
+  padding: 12px 25px;
+  background: rgba(219, 234, 254, 0.6);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  font-size: 18px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  width: fit-content;
+}
